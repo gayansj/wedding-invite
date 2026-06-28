@@ -1,0 +1,6 @@
+{
+  "name": "Wedding Invitation",
+  "description": "An elegant, luxurious wedding invitation for Sanduni & Kasun with a countdown timer, event details, venue map, and interactive RSVP.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

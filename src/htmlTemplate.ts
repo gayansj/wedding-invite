@@ -1,0 +1,704 @@
+export const HTML_TEMPLATE = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation | Sanduni & Kasun</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        cursive: ['Great Vibes', 'cursive'],
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        rose: {
+                            gold: '#B76E79',
+                            champagne: '#F9E8E2',
+                            luxury: '#A65A66',
+                        },
+                        gold: {
+                            accent: '#D4AF37',
+                            soft: '#F4E3B1',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #B76E79 0%, #D4AF37 50%, #A65A66 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .luxury-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(183, 110, 121, 0.15);
+            box-shadow: 0 10px 30px -10px rgba(183, 110, 121, 0.1);
+        }
+
+        .gold-border {
+            position: relative;
+        }
+        .gold-border::after {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            pointer-events: none;
+            border-radius: 4px;
+        }
+
+        /* Blossom falling animation */
+        .blossom-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+            background: radial-gradient(circle, #FFF5F5 0%, #F9E8E2 70%, #B76E79 100%);
+            border-radius: 150% 0 150% 150%;
+            opacity: 0.8;
+            pointer-events: none;
+            transform-origin: left top;
+            animation: fade-down-rotate linear infinite;
+        }
+
+        @keyframes fade-down-rotate {
+            0% {
+                transform: translateY(-10%) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Pulse animation */
+        .pulse-soft {
+            animation: pulse-key 2.5s infinite ease-in-out;
+        }
+        @keyframes pulse-key {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.03); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-[#FBF7F4] font-sans text-gray-700 min-h-screen relative selection:bg-rose-gold/20">
+
+    <!-- Falling Petals Background -->
+    <div class="blossom-container" id="blossoms"></div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="max-w-5xl mx-auto px-4 py-8 md:py-16 flex flex-col gap-12 md:gap-24">
+
+        <!-- 1. HERO SECTION -->
+        <header id="welcome" class="relative overflow-hidden rounded-2xl luxury-card gold-border min-h-[90vh] flex flex-col justify-between items-center text-center p-8 md:p-16">
+            
+            <!-- Elegant Corner Borders -->
+            <div class="absolute top-6 left-6 w-12 h-12 border-t-2 border-l-2 border-rose-gold/40"></div>
+            <div class="absolute top-6 right-6 w-12 h-12 border-t-2 border-r-2 border-rose-gold/40"></div>
+            <div class="absolute bottom-6 left-6 w-12 h-12 border-b-2 border-l-2 border-rose-gold/40"></div>
+            <div class="absolute bottom-6 right-6 w-12 h-12 border-b-2 border-r-2 border-rose-gold/40"></div>
+
+            <!-- Top Flourish -->
+            <div class="pt-6">
+                <span class="text-xs uppercase tracking-[0.3em] text-rose-gold font-semibold block mb-2">ආරාධනා - Invitation</span>
+                <div class="w-16 h-[1px] bg-gold-accent/50 mx-auto"></div>
+            </div>
+
+            <!-- Center Names & Photo placeholder -->
+            <div class="my-auto py-10 flex flex-col items-center">
+                <!-- Circular Floral Icon Frame -->
+                <div class="w-24 h-24 rounded-full border border-gold-accent/40 p-1 mb-6 animate-spin-slow flex items-center justify-center bg-white/50">
+                    <svg class="w-16 h-16 text-rose-gold" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                        <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                    </svg>
+                </div>
+                
+                <h1 class="font-cursive text-6xl md:text-8xl text-rose-luxury mb-4 drop-shadow-sm select-none">Sanduni</h1>
+                <div class="font-serif italic text-xl md:text-2xl text-rose-gold my-2 font-light flex items-center gap-4">
+                    <span class="h-[1px] w-8 bg-rose-gold/30"></span>
+                    <span>&</span>
+                    <span class="h-[1px] w-8 bg-rose-gold/30"></span>
+                </div>
+                <h1 class="font-cursive text-6xl md:text-8xl text-rose-luxury mb-6 drop-shadow-sm select-none">Kasun</h1>
+                
+                <p class="font-serif text-sm md:text-lg text-gray-600 max-w-md mx-auto italic mt-4 leading-relaxed px-4">
+                    "With joyful hearts, we request the honour of your presence as we unite in holy matrimony."
+                </p>
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-rose-gold/80 mt-2">
+                    මනාලිය: Sanduni & මනාලයා: Kasun
+                </p>
+            </div>
+
+            <!-- Bottom Date & CTA -->
+            <div class="w-full max-w-sm pb-6">
+                <div class="font-serif text-lg text-rose-luxury font-semibold uppercase tracking-[0.2em] mb-4">
+                    Thursday, October 15, 2026
+                </div>
+                <div class="flex justify-center gap-6 text-xs text-gray-500 font-medium tracking-wider mb-8 uppercase">
+                    <span>4:00 PM Onwards</span>
+                    <span>•</span>
+                    <span>Shangri-La, Colombo</span>
+                </div>
+                
+                <a href="#rsvp" class="inline-block bg-rose-gold hover:bg-rose-luxury text-white font-sans text-xs uppercase tracking-widest font-semibold py-4 px-10 rounded shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 pulse-soft">
+                    Reserve Your Seat
+                </a>
+            </div>
+        </header>
+
+        <!-- COUPLE PORTRAIT SECTION -->
+        <section id="couple" class="luxury-card rounded-2xl p-8 md:p-12 text-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-b from-rose-champagne/10 to-transparent pointer-events-none"></div>
+            
+            <div class="absolute top-4 right-4 z-20">
+                <label class="cursor-pointer bg-white/80 hover:bg-white text-rose-gold text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full border border-rose-gold/20 transition-all flex items-center gap-1.5 shadow-sm">
+                    <input type="file" id="couple-photo-upload" accept="image/*" class="hidden" onchange="previewCouplePhoto(event)">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    <span>Upload Our Photo</span>
+                </label>
+            </div>
+
+            <div class="max-w-2xl mx-auto flex flex-col items-center">
+                <span class="text-xs tracking-[0.2em] text-rose-gold uppercase font-semibold mb-2">Meet the Bride & Groom</span>
+                <h2 class="font-serif text-3xl text-rose-luxury mb-8">Sanduni & Kasun</h2>
+                
+                <!-- Elegant Arch Framed Image with Rose Gold/Gold Border -->
+                <div class="relative w-64 h-80 md:w-72 md:h-96 rounded-t-full border-4 border-gold-accent p-1 shadow-xl bg-white overflow-hidden mb-6 group">
+                    <img id="couple-image-display" src="/src/assets/images/wedding_couple_1782650367856.jpg" class="w-full h-full object-cover rounded-t-full transition-transform duration-700 group-hover:scale-105" alt="Sanduni & Kasun">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                        <span class="text-white text-xs tracking-wider uppercase font-semibold">Forever & Always</span>
+                    </div>
+                </div>
+
+                <p class="font-cursive text-3xl text-rose-gold mb-3">Two Hearts, One Journey</p>
+                <p class="font-sans text-xs md:text-sm text-gray-500 max-w-md italic leading-relaxed">
+                    "We are starting a beautiful chapter of life together, and having you witness our vows is the greatest gift we could ask for."
+                </p>
+            </div>
+        </section>
+
+        <!-- 2. COUNTDOWN TIMER -->
+        <section id="countdown-section" class="luxury-card rounded-2xl p-8 md:p-12 text-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-rose-champagne/10 via-transparent to-rose-champagne/10 pointer-events-none"></div>
+            
+            <h2 class="font-serif text-2xl md:text-3xl text-rose-luxury mb-2">Counting Down To Our Forever</h2>
+            <p class="text-xs tracking-widest text-rose-gold uppercase mb-8">October 15, 2026 • 4:00 PM onwards</p>
+            
+            <div class="grid grid-cols-4 gap-2 md:gap-6 max-w-xl mx-auto">
+                <div class="bg-white/80 p-3 md:p-6 rounded-lg border border-rose-gold/10 shadow-sm">
+                    <span id="days" class="font-serif text-3xl md:text-5xl text-rose-luxury block font-light">00</span>
+                    <span class="text-[10px] md:text-xs text-rose-gold uppercase tracking-widest">Days</span>
+                </div>
+                <div class="bg-white/80 p-3 md:p-6 rounded-lg border border-rose-gold/10 shadow-sm">
+                    <span id="hours" class="font-serif text-3xl md:text-5xl text-rose-luxury block font-light">00</span>
+                    <span class="text-[10px] md:text-xs text-rose-gold uppercase tracking-widest">Hours</span>
+                </div>
+                <div class="bg-white/80 p-3 md:p-6 rounded-lg border border-rose-gold/10 shadow-sm">
+                    <span id="minutes" class="font-serif text-3xl md:text-5xl text-rose-luxury block font-light">00</span>
+                    <span class="text-[10px] md:text-xs text-rose-gold uppercase tracking-widest">Mins</span>
+                </div>
+                <div class="bg-white/80 p-3 md:p-6 rounded-lg border border-rose-gold/10 shadow-sm">
+                    <span id="seconds" class="font-serif text-3xl md:text-5xl text-rose-luxury block font-light">00</span>
+                    <span class="text-[10px] md:text-xs text-rose-gold uppercase tracking-widest">Secs</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. EVENT DETAILS SECTION -->
+        <section id="details" class="grid md:grid-cols-2 gap-8 items-stretch">
+            
+            <!-- Left Info Card -->
+            <div class="luxury-card rounded-2xl p-8 md:p-12 flex flex-col justify-between border-l-4 border-rose-gold">
+                <div>
+                    <span class="text-xs tracking-[0.25em] text-rose-gold uppercase block font-semibold mb-3">Event Details</span>
+                    <h2 class="font-serif text-3xl text-rose-luxury mb-6 leading-tight">Ceremony & Reception</h2>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4 items-start">
+                            <div class="w-10 h-10 rounded-full bg-rose-champagne/40 flex items-center justify-center shrink-0 border border-rose-gold/10 text-rose-gold">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-serif text-sm font-semibold text-gray-800">Date</h4>
+                                <p class="text-sm text-gray-600">Thursday, October 15, 2026</p>
+                                <p class="text-xs text-rose-gold mt-1">2026 ඔක්තෝබර් 15 වනදා</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 items-start">
+                            <div class="w-10 h-10 rounded-full bg-rose-champagne/40 flex items-center justify-center shrink-0 border border-rose-gold/10 text-rose-gold">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-serif text-sm font-semibold text-gray-800">Time</h4>
+                                <p class="text-sm text-gray-600">4:00 PM Onwards</p>
+                                <p class="text-xs text-rose-gold mt-1">සවස 4:00 සිට ඉදිරියට</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 items-start">
+                            <div class="w-10 h-10 rounded-full bg-rose-champagne/40 flex items-center justify-center shrink-0 border border-rose-gold/10 text-rose-gold">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-serif text-sm font-semibold text-gray-800">Venue</h4>
+                                <p class="text-sm text-gray-600">Shangri-La Hotel, Colombo</p>
+                                <p class="text-xs text-rose-gold mt-1">ශැන්ග්‍රි-ලා හෝටලය, කොළඹ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-rose-gold/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                        <span class="text-xs text-gray-500 uppercase tracking-widest block">RSVP Contact</span>
+                        <p class="font-serif text-md text-rose-luxury font-semibold">+94 77 123 4567</p>
+                    </div>
+                    <a href="tel:+94771234567" class="text-xs font-semibold uppercase text-rose-gold border-b border-rose-gold pb-0.5 hover:text-rose-luxury hover:border-rose-luxury transition-all">
+                        Call RSVP Contact
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Map Card -->
+            <div class="luxury-card rounded-2xl overflow-hidden min-h-[350px] flex flex-col relative border border-rose-gold/15">
+                <div class="p-6 bg-white/50 border-b border-rose-gold/10 flex justify-between items-center">
+                    <div>
+                        <h4 class="font-serif font-semibold text-gray-800 text-sm">Venue Location Map</h4>
+                        <p class="text-xs text-gray-500">Colombo, Sri Lanka</p>
+                    </div>
+                    <a href="https://maps.google.com/?q=Shangri-La+Hotel+Colombo" target="_blank" class="bg-rose-gold hover:bg-rose-luxury text-white text-[10px] uppercase tracking-widest font-bold py-2 px-4 rounded transition-all">
+                        Open in Google Maps
+                    </a>
+                </div>
+                <!-- Embedded Google Map -->
+                <div class="grow w-full h-full min-h-[250px]">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.716301323863!2d79.84279627581146!3d6.9244670183183535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1m3!1zMHgzYWUyNTlmODg5NTg5ODhmOjB4ZTdkNDMwMTk2MTJkZWYyOQ!2zU2hhbmdyaS1MYSBIb3RlbCBDb2xvbWJv!5e0!3m2!1sen!2slk!4v1782649831783!5m2!1sen!2slk" 
+                        class="w-full h-full border-0" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. RSVP FORM SECTION -->
+        <section id="rsvp" class="luxury-card rounded-2xl p-8 md:p-12 relative max-w-3xl mx-auto w-full">
+            <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-rose-champagne via-rose-gold to-rose-champagne rounded-t-2xl"></div>
+            
+            <div class="text-center mb-8">
+                <span class="text-xs uppercase tracking-[0.25em] text-rose-gold font-semibold block mb-2">Kindly Respond</span>
+                <h2 class="font-serif text-3xl text-rose-luxury">Will You Celebrate With Us?</h2>
+                <p class="text-xs text-gray-500 mt-2">Please respond before October 1st, 2026</p>
+                <div class="w-12 h-[1px] bg-gold-accent/40 mx-auto mt-4"></div>
+            </div>
+
+            <!-- SUCCESS MESSAGE (Hidden initially) -->
+            <div id="rsvp-success" class="hidden text-center py-8 flex flex-col items-center">
+                <div class="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-500 flex items-center justify-center mb-4">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <h3 class="font-serif text-xl text-rose-luxury font-semibold">Thank You!</h3>
+                <p class="text-sm text-gray-600 max-w-md mx-auto mt-2 leading-relaxed">
+                    Your RSVP response has been submitted successfully. We cannot wait to share this magical day with you!
+                </p>
+                <button onclick="resetRsvpForm()" class="mt-6 text-xs text-rose-gold border-b border-rose-gold pb-0.5 hover:text-rose-luxury hover:border-rose-luxury transition-all">
+                    Submit another response
+                </button>
+            </div>
+
+            <!-- THE FORM -->
+            <form id="rsvp-form" onsubmit="submitRsvp(event)" class="space-y-6">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-rose-gold font-semibold mb-2" for="guest-name">Your Full Name</label>
+                        <input type="text" id="guest-name" required class="w-full bg-white border border-rose-gold/20 rounded px-4 py-3 font-sans text-sm focus:outline-none focus:ring-1 focus:ring-rose-gold focus:border-rose-gold transition-all" placeholder="Enter your full name">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-rose-gold font-semibold mb-2" for="guest-phone">Contact Number</label>
+                        <input type="tel" id="guest-phone" required class="w-full bg-white border border-rose-gold/20 rounded px-4 py-3 font-sans text-sm focus:outline-none focus:ring-1 focus:ring-rose-gold focus:border-rose-gold transition-all" placeholder="e.g. +94 77 123 4567">
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-rose-gold font-semibold mb-2" for="guest-count">Number of Guests</label>
+                        <select id="guest-count" required class="w-full bg-white border border-rose-gold/20 rounded px-4 py-3 font-sans text-sm focus:outline-none focus:ring-1 focus:ring-rose-gold focus:border-rose-gold transition-all">
+                            <option value="1">1 Person</option>
+                            <option value="2">2 People</option>
+                            <option value="3">3 People</option>
+                            <option value="4">4 People</option>
+                            <option value="5">5 People</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-rose-gold font-semibold mb-2">Attendance</label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="border border-rose-gold/20 rounded px-4 py-3 flex items-center justify-center gap-2 cursor-pointer bg-white text-sm font-medium hover:bg-rose-champagne/10 transition-all">
+                                <input type="radio" name="attendance" value="yes" checked class="text-rose-gold focus:ring-rose-gold">
+                                <span>Joyfully Attend</span>
+                            </label>
+                            <label class="border border-rose-gold/20 rounded px-4 py-3 flex items-center justify-center gap-2 cursor-pointer bg-white text-sm font-medium hover:bg-rose-champagne/10 transition-all">
+                                <input type="radio" name="attendance" value="no" class="text-rose-gold focus:ring-rose-gold">
+                                <span>Regretfully Decline</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-rose-gold font-semibold mb-2" for="guest-notes">Warm Wishes & Dietary Notes (Optional)</label>
+                    <textarea id="guest-notes" rows="3" class="w-full bg-white border border-rose-gold/20 rounded px-4 py-3 font-sans text-sm focus:outline-none focus:ring-1 focus:ring-rose-gold focus:border-rose-gold transition-all" placeholder="Write any message, wishes or dietary constraints here..."></textarea>
+                </div>
+
+                <div class="text-center pt-2">
+                    <button type="submit" class="w-full bg-rose-gold hover:bg-rose-luxury text-white text-xs font-semibold uppercase tracking-widest py-4 px-12 rounded shadow-md hover:shadow-lg transition-all duration-300">
+                        Submit Response
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- 5. GUEST RESPONSES LIST (A beautiful secure-like admin viewer for testing) -->
+        <section id="guest-records" class="max-w-3xl mx-auto w-full text-center">
+            <button onclick="toggleAdminPanel()" class="inline-flex items-center gap-2 text-xs text-rose-gold hover:text-rose-luxury hover:underline transition-all font-semibold uppercase tracking-wider">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                <span>Access Couple's RSVP Dashboard</span>
+            </button>
+
+            <!-- Embedded Couple's Dashboard -->
+            <div id="admin-panel" class="hidden mt-6 text-left luxury-card rounded-2xl p-6 border border-rose-gold/20">
+                <div class="flex justify-between items-center border-b border-rose-gold/15 pb-4 mb-4">
+                    <div>
+                        <h3 class="font-serif text-lg text-rose-luxury font-semibold">RSVP Submissions Panel</h3>
+                        <p class="text-xs text-gray-500">Live responses registered locally</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="exportRSVPs()" class="bg-rose-champagne/50 border border-rose-gold/20 hover:bg-rose-champagne text-xs text-rose-luxury px-3 py-1.5 rounded transition-all">
+                            Export JSON
+                        </button>
+                        <button onclick="clearRSVPs()" class="bg-red-50 hover:bg-red-100 text-xs text-red-600 border border-red-200 px-3 py-1.5 rounded transition-all">
+                            Clear All
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                    <div class="bg-white/80 p-3 rounded-lg border border-rose-gold/10 text-center shadow-sm">
+                        <span id="stat-total" class="font-serif text-2xl text-rose-luxury block font-semibold">0</span>
+                        <span class="text-[10px] text-gray-500 uppercase tracking-widest">Responses</span>
+                    </div>
+                    <div class="bg-white/80 p-3 rounded-lg border border-rose-gold/10 text-center shadow-sm">
+                        <span id="stat-attending" class="font-serif text-2xl text-emerald-600 block font-semibold">0</span>
+                        <span class="text-[10px] text-gray-500 uppercase tracking-widest">Attending Guests</span>
+                    </div>
+                    <div class="bg-white/80 p-3 rounded-lg border border-rose-gold/10 text-center shadow-sm">
+                        <span id="stat-declined" class="font-serif text-2xl text-red-600 block font-semibold">0</span>
+                        <span class="text-[10px] text-gray-500 uppercase tracking-widest">Declined</span>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-gray-600">
+                        <thead>
+                            <tr class="border-b border-rose-gold/10 text-left text-rose-luxury font-semibold">
+                                <th class="pb-2">Name</th>
+                                <th class="pb-2">Phone</th>
+                                <th class="pb-2">Guests</th>
+                                <th class="pb-2">Attending</th>
+                                <th class="pb-2">Wishes/Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-table-body" class="divide-y divide-rose-gold/5">
+                            <!-- Injected dynamically -->
+                            <tr>
+                                <td colspan="5" class="py-4 text-center text-gray-400 italic">No submissions yet. Be the first to RSVP!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="text-center py-6 border-t border-rose-gold/10 mt-6 flex flex-col items-center gap-4">
+            <p class="font-cursive text-3xl text-rose-gold">Ishara & Gayan</p>
+            <p class="text-[10px] tracking-widest text-gray-400 uppercase">
+                Designed with Love • Made for our beautiful union
+            </p>
+        </footer>
+    </div>
+
+    <!-- MAIN INLINE JAVASCRIPT -->
+    <script>
+        // 1. Countdown Logic
+        const targetDate = new Date("October 15, 2026 16:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.getElementById("days").innerText = "00";
+                document.getElementById("hours").innerText = "00";
+                document.getElementById("minutes").innerText = "00";
+                document.getElementById("seconds").innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = String(days).padStart(2, '0');
+            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+            document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+            document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Run immediately
+
+        // 2. Blossom Falling Animation
+        const blossomContainer = document.getElementById("blossoms");
+        const maxPetals = 24;
+
+        function createPetal() {
+            if (blossomContainer.children.length >= maxPetals) return;
+
+            const petal = document.createElement("div");
+            petal.className = "petal";
+            
+            // Random parameters
+            const size = Math.random() * 8 + 6; // Width in px
+            const left = Math.random() * 100; // Position left %
+            const duration = Math.random() * 6 + 6; // Animation seconds
+            const delay = Math.random() * 4; // Delay seconds
+
+            petal.style.width = size + "px";
+            petal.style.height = (size * 1.2) + "px";
+            petal.style.left = left + "%";
+            petal.style.animationDuration = duration + "s";
+            petal.style.animationDelay = delay + "s";
+
+            blossomContainer.appendChild(petal);
+
+            // Remove petal once animation ends
+            setTimeout(() => {
+                petal.remove();
+            }, (duration + delay) * 1000);
+        }
+
+        // Generate petals periodically
+        setInterval(createPetal, 1200);
+        for(let i = 0; i < 10; i++) {
+            createPetal();
+        }
+
+        // 3. RSVP Handling with Local Storage
+        let rsvpRecords = JSON.parse(localStorage.getItem("wedding_rsvps")) || [];
+
+        function renderAdminTable() {
+            const tableBody = document.getElementById("admin-table-body");
+            const statTotal = document.getElementById("stat-total");
+            const statAttending = document.getElementById("stat-attending");
+            const statDeclined = document.getElementById("stat-declined");
+
+            if (!tableBody) return;
+
+            if (rsvpRecords.length === 0) {
+                tableBody.innerHTML = \`
+                    <tr>
+                        <td colspan="5" class="py-4 text-center text-gray-400 italic">No submissions yet. Be the first to RSVP!</td>
+                    </tr>
+                \`;
+                statTotal.innerText = "0";
+                statAttending.innerText = "0";
+                statDeclined.innerText = "0";
+                return;
+            }
+
+            // Calculations
+            let totalResponses = rsvpRecords.length;
+            let attendingCount = 0;
+            let declinedCount = 0;
+
+            tableBody.innerHTML = rsvpRecords.map(record => {
+                if (record.attending) {
+                    attendingCount += parseInt(record.guests || 1);
+                } else {
+                    declinedCount++;
+                }
+
+                return \`
+                    <tr class="border-b border-rose-gold/5 py-3 hover:bg-rose-champagne/5 transition-all">
+                        <td class="py-2.5 font-semibold text-gray-800">\${record.name}</td>
+                        <td class="py-2.5">\${record.phone}</td>
+                        <td class="py-2.5 font-medium">\${record.guests}</td>
+                        <td class="py-2.5">
+                            \${record.attending 
+                                ? '<span class="bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded-full font-semibold">Attending</span>' 
+                                : '<span class="bg-red-50 text-red-600 px-2 py-0.5 rounded-full font-semibold">Declined</span>'
+                            }
+                        </td>
+                        <td class="py-2.5 italic text-gray-500 max-w-xs truncate" title="\${record.notes || ''}">
+                            \${record.notes || '<span class="text-gray-300">-</span>'}
+                        </td>
+                    </tr>
+                \`;
+            }).join("");
+
+            statTotal.innerText = totalResponses;
+            statAttending.innerText = attendingCount;
+            statDeclined.innerText = declinedCount;
+        }
+
+        function submitRsvp(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById("guest-name").value;
+            const phone = document.getElementById("guest-phone").value;
+            const guests = parseInt(document.getElementById("guest-count").value);
+            const attending = document.querySelector('input[name="attendance"]:checked').value === "yes";
+            const notes = document.getElementById("guest-notes").value;
+
+            const newRecord = {
+                id: Date.now().toString(),
+                name,
+                phone,
+                guests: attending ? guests : 0,
+                attending,
+                notes,
+                submittedAt: new Date().toLocaleString()
+            };
+
+            rsvpRecords.push(newRecord);
+            localStorage.setItem("wedding_rsvps", JSON.stringify(rsvpRecords));
+
+            // Show success
+            document.getElementById("rsvp-form").classList.add("hidden");
+            document.getElementById("rsvp-success").classList.remove("hidden");
+
+            // Refresh table
+            renderAdminTable();
+
+            // WhatsApp formatting and redirection
+            const rsvpWhatsappNumber = "94771234567"; // Wedding RSVP target contact number without spaces/symbols
+            const attendingLabel = attending ? "Joyfully Attend 💍 (සතුටින් සහභාගී වේ)" : "Regretfully Decline ✉️ (කණගාටුවෙන් යුතුව සහභාගී විය නොහැක)";
+            const guestCountLabel = attending ? guests + " Person(s)" : "0";
+            const notesLabel = notes ? notes : "None";
+
+            const waMessage = '💍 *WEDDING RSVP CONFIRMATION* 💍\n\n' +
+                              'Hello Sanduni & Kasun,\n' +
+                              'I have submitted my RSVP for your wedding! Here are my details:\n\n' +
+                              '👤 *Guest Name:* ' + name + '\n' +
+                              '📞 *Contact Number:* ' + phone + '\n' +
+                              '✨ *Response:* ' + attendingLabel + '\n' +
+                              '👥 *Number of Guests:* ' + guestCountLabel + '\n' +
+                              '📝 *Wishes & Notes:* ' + notesLabel + '\n\n' +
+                              '_Thank you, and looking forward to your big day!_';
+
+            const waUrl = 'https://wa.me/' + rsvpWhatsappNumber + '?text=' + encodeURIComponent(waMessage);
+            
+            // Open WhatsApp in a new window/tab safely
+            setTimeout(() => {
+                window.open(waUrl, '_blank');
+            }, 300);
+        }
+
+        function resetRsvpForm() {
+            document.getElementById("rsvp-form").reset();
+            document.getElementById("rsvp-form").classList.remove("hidden");
+            document.getElementById("rsvp-success").classList.add("hidden");
+        }
+
+        // 4. Persisted Custom Couple Photo Upload and Preview
+        const localSavedPhoto = localStorage.getItem("wedding_couple_photo");
+        if (localSavedPhoto) {
+            document.getElementById("couple-image-display").src = localSavedPhoto;
+        }
+
+        function previewCouplePhoto(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const base64Photo = e.target.result;
+                document.getElementById("couple-image-display").src = base64Photo;
+                localStorage.setItem("wedding_couple_photo", base64Photo);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function toggleAdminPanel() {
+            const panel = document.getElementById("admin-panel");
+            if (panel.classList.contains("hidden")) {
+                panel.classList.remove("hidden");
+                panel.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                panel.classList.add("hidden");
+            }
+        }
+
+        function clearRSVPs() {
+            if (confirm("Are you sure you want to clear all RSVPs? This action cannot be undone.")) {
+                rsvpRecords = [];
+                localStorage.setItem("wedding_rsvps", JSON.stringify(rsvpRecords));
+                renderAdminTable();
+            }
+        }
+
+        function exportRSVPs() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(rsvpRecords, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", "wedding_rsvps_export.json");
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        // Initial setup
+        renderAdminTable();
+    </script>
+</body>
+</html>
+`;
